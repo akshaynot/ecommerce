@@ -1,9 +1,13 @@
 import 'package:ecommerce/models/shoe.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 class ShoeTile extends StatelessWidget {
   Shoe shoe;
-  ShoeTile({super.key, required this.shoe});
+
+  void Function()? onTap;
+
+  ShoeTile({super.key, required this.shoe, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -24,9 +28,13 @@ class ShoeTile extends StatelessWidget {
           ),
 
           // description
-          Text(
-            shoe.description,
-            style: TextStyle(color: Colors.grey[600]),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 25),
+            child: Text(
+              textAlign: TextAlign.start,
+              shoe.description,
+              style: TextStyle(color: Colors.grey[600]),
+            ),
           ),
 
           // price + details
@@ -60,17 +68,20 @@ class ShoeTile extends StatelessWidget {
                 ),
 
                 // add to cart button
-                Container(
-                  padding: const EdgeInsets.all(20),
-                  decoration: const BoxDecoration(
-                      color: Colors.black,
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(12),
-                        bottomRight: Radius.circular(12),
-                      )),
-                  child: const Icon(
-                    Icons.add,
-                    color: Colors.white,
+                GestureDetector(
+                  onTap: onTap,
+                  child: Container(
+                    padding: const EdgeInsets.all(20),
+                    decoration: const BoxDecoration(
+                        color: Colors.black,
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(12),
+                          bottomRight: Radius.circular(12),
+                        )),
+                    child: const Icon(
+                      Icons.add,
+                      color: Colors.white,
+                    ),
                   ),
                 ),
               ],
